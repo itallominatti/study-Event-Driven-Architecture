@@ -17,7 +17,7 @@ func NewEventDispatcher() *EventDispatcher {
 func (ev *EventDispatcher) Dispatch(event EventInterface) error {
 	if handlers, ok := ev.handlers[event.GetName()]; ok {
 		for _, handler := range handlers {
-			handler.Handle(event)
+			go handler.Handle(event)
 		}
 	}
 
